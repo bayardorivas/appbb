@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
       transaction["user"] = mongoUser._id;
 
       const response = await fetch(
-        "http://localhost:2500/api/v1/transactions",
+        `${process.env.REACT_APP_API_URL}/api/v1/transactions`,
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
   const getUserFromDb = async (firebaseId) => {
     try {
       const response = await fetch(
-        `http://localhost:2500/api/v1/users/${firebaseId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/users/${firebaseId}`
       );
       const data = await response.json();
       if (response.status !== 200) return null;
@@ -53,7 +53,7 @@ export const UserProvider = ({ children }) => {
 
   const insertUserIntoDb = async (firebaseId, name, email) => {
     try {
-      const response = await fetch("http://localhost:2500/api/v1/users", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
