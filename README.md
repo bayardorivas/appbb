@@ -1,11 +1,9 @@
+![BR Bad Bank application](https://github.com/bayardorivas/appbb/blob/master/splash.png "BR Bad Bank - Bayardo Rivas - MIT Capstone Project")
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-
-  1. 
-
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/bayardorivas" target="_blank">Bayardo Rivas</a>
@@ -15,7 +13,9 @@
 
 ## :dart: About ##
 
-  This project simulates some of the most basics transactions on a bank application. In this project I am using as Database the service of [MongoDb Atlas](https://www.mongodb.com/atlas/database) wich is a Database cloud service. I defined a [DAL](https://en.wikipedia.org/wiki/Database_abstraction_layer) that give us the flexibility to change make change on our Database backend with mininum effort and separated from the application. 
+This is my capstone project for "Professional Certificate in Coding: Full Stack Development with MERN" at [MIT - Massachusetts Institute of Technology](https://web.mit.edu/). It has been a great experience, with a lot of learning about all the development ecosystem. 
+
+  The project simulates some of the most basics transactions on a bank application. In this project I am using as Database the service of [MongoDb Atlas](https://www.mongodb.com/atlas/database) wich is a Database cloud service. I defined a [DAL](https://en.wikipedia.org/wiki/Database_abstraction_layer) that give us the flexibility to change make change on our Database backend with mininum effort and separated from the application. 
   
   The frontend is created with HTML, Bottstrap as CSS library and ReactJS, so fields are validated and transactions affects the balance, the user can not wihdraw more than the balance in the account, passords are validated to be more than 8 characters, amounts fields can not be negatives or other characters than numbers. Any user can create accouts, and make its own transactactios and see these as well.
   
