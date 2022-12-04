@@ -11,7 +11,11 @@ const port = 2500;
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: bayardorivasromero-badbank.onrender.com
+  }
+));
 
 const swaggerOptions = {
   swaggerDefinition: {
