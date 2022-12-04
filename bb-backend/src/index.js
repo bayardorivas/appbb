@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors(
   {
-    origin: bayardorivasromero-badbank.onrender.com
+    origin: "https://bayardorivasromero-badbank.onrender.com"
   }
 ));
 
