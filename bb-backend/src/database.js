@@ -1,11 +1,17 @@
-import mongoose from "mongoose";
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import { connect } from 'mongoose'
 
-try {
-  // const db = await mongoose.connect("mongodb://127.0.0.1/badbank");
-  const db = mongoose.connect(process.env.mongoUrl);
-  // console.log(`connected ${db.connection.name}`);
-} catch (error) {
-  console.log(error);
-};
+const dbConnection = async () => {
+  try {
+    await connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+
+    console.log('Database is Connected')
+  } catch (e) {
+    console.log(e)
+    throw new Error('Error to connect BD')
+  }
+}
+
+export default dbConnection

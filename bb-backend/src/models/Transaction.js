@@ -8,7 +8,6 @@ const TransactionSchema = new Schema({
   user: {
     type: ObjectId,
     ref: "User",
-    // required: true,
   },
   transactionType: {
     type: String,

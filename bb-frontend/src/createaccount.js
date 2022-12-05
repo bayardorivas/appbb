@@ -46,15 +46,13 @@ const CreateAccount = () => {
         email,
         secret
       );
-      const userInsertedInDb = await insertUserIntoDb(
-        credentials.user.uid,
-        name,
-        email
-      );
-      setShow(false);
+
+      if (credentials.user.uid) {
+        await insertUserIntoDb(credentials.user.uid, name, email);
+        setShow(false);
+      } 
     } catch (error) {
       console.log(error);
-      // TODO: Add error message during user creation
       setMessageError("Account could not be created");
     }
   };
@@ -65,11 +63,7 @@ const CreateAccount = () => {
 
   return (
     <div className="row mt-3">
-      {messageError && 
-      <Alert variant={"danger"}>
-       {messageError}
-    </Alert>
-      }
+      {messageError && <Alert variant={"danger"}>{messageError}</Alert>}
       <div className="col-6 offset-3">
         <Card
           header="Create Account"

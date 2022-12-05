@@ -12,11 +12,12 @@ import { auth } from "./firebase/base";
 const NavBar = () => {
   const navigate = useNavigate();
   
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   
   const logout = async () => {
     try {
       await signOut(auth);
+      setCurrentUser(null);
       navigate("/");
     } catch (error) {
       console.log(error); 

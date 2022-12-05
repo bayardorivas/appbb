@@ -22,7 +22,7 @@ export const createUser = async (req, res) => {
       name,
       email,
     });
-    await newUser.save();
+    const userCreated = await newUser.save();
     const firstTransaction = new Transaction({
       date: new Date(),
       transactionType: "DEPOSIT",

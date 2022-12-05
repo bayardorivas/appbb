@@ -1,16 +1,18 @@
 import { useState, useEffect, createContext } from "react";
 import { auth } from "./firebase/base";
 import { onAuthStateChanged } from "firebase/auth";
-// import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-// dotenv.config();
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    onAuthStateChanged(auth, (loggedUser) => setCurrentUser(loggedUser));
-    console.log(currentUser);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
   }, []);
 
   const addTransaction = async (transaction) => {
@@ -29,9 +31,8 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status !== 200) return null;
-      
+
       const data = await response.json();
-      console.log("data:",data);
       return data;
     } catch (error) {
       console.log(error);
@@ -41,7 +42,13 @@ export const UserProvider = ({ children }) => {
   const getUserFromDb = async (firebaseId) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/v1/users/${firebaseId}`
+        `${process.env.REACT_APP_API_URL}/api/v1/users/${firebaseId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        }
       );
       const data = await response.json();
       if (response.status !== 200) return null;
@@ -54,17 +61,21 @@ export const UserProvider = ({ children }) => {
 
   const insertUserIntoDb = async (firebaseId, name, email) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify({
-          firebaseId,
-          name,
-          email,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/v1/users`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: JSON.stringify({
+            firebaseId,
+            name,
+            email,
+          }),
+        }
+      );
+
       const data = await response.json();
       if (response.status !== 200) return null;
       return data;
@@ -76,7 +87,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ currentUser, addTransaction, getUserFromDb, insertUserIntoDb }}
+      value={{ currentUser, setCurrentUser, addTransaction, getUserFromDb, insertUserIntoDb }}
     >
       {children}
     </UserContext.Provider>
